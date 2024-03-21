@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv) {
     if(argc < 3) {
-        printf("two arguments expected: % <num1> <num2>\r\n", argv[0]);
+        printf("two arguments expected: %s <num1> <num2>\r\n", argv[0]);
         return 1;
     }
 
