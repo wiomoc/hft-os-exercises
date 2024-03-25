@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <stdint.h>
 
-#define ROUNDS 800 * 1000 * 1000
+#define ROUNDS (800 * 1000 * 1000)
 
 static uint32_t init_rand() {
     int fd = open("/dev/urandom", 0);
@@ -14,6 +14,7 @@ static uint32_t init_rand() {
         exit(1);
     }
     close(fd);
+    return seed;
 }
 
 float rand_double(uint32_t* seed) {

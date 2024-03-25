@@ -1,4 +1,4 @@
-# Exercise 1
+# Exercise 01: Introduction
 ## Setup
 ### GitHub Codespace
 With GitHub Codespaces you use a machine in the cloud. This allows you to carry out the exercises without having Linux and other tools installed.
@@ -13,6 +13,8 @@ However if you using ubuntu you probably need the following additional packages:
 * `strace`
 * `build-essential`
 * `gcc`
+* `pkgconf`
+* `libfuse3-dev`
 
 
 ## man pages

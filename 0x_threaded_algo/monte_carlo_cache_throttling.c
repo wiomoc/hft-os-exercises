@@ -6,8 +6,8 @@
 #include <pthread.h>
 
 #define THREAD_COUNT 16
-#define ROUNDS_PER_THREAD 50 * 1000 * 1000
-#define ROUNDS THREAD_COUNT * ROUNDS_PER_THREAD
+#define ROUNDS_PER_THREAD (50 * 1000 * 1000)
+#define ROUNDS (THREAD_COUNT * ROUNDS_PER_THREAD)
 
 uint32_t seeds[THREAD_COUNT];
 static void init_rand() {

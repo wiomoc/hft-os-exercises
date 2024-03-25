@@ -1,0 +1,23 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/java:0-17",
+  "hostRequirements": {
+    "cpus": 4
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "true",
+      "installGradle": "false"
+    },
+    "ghcr.io/devcontainers-contrib/features/ant-sdkman:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.makefile-tools",
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}

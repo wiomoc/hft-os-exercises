@@ -6,8 +6,8 @@
 #include <pthread.h>
 
 #define THREAD_COUNT 8
-#define ROUNDS_PER_THREAD 100 * 1000 * 1000
-#define ROUNDS THREAD_COUNT * ROUNDS_PER_THREAD
+#define ROUNDS_PER_THREAD (100 * 1000 * 1000)
+#define ROUNDS (THREAD_COUNT * ROUNDS_PER_THREAD)
 
 static uint32_t init_rand() {
     int fd = open("/dev/urandom", 0);
@@ -17,6 +17,7 @@ static uint32_t init_rand() {
         exit(1);
     }
     close(fd);
+    return seed;
 }
 
 float rand_double(uint32_t* seed) {
