@@ -15,6 +15,7 @@ However if you using ubuntu you probably need the following additional packages:
 * `gcc`
 * `pkgconf`
 * `libfuse3-dev`
+* `fdisk`
 
 
 ## man pages
