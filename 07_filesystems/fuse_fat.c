@@ -18,15 +18,15 @@ struct {
     int img_fd;
     uint8_t* file_allocation_table;
     // todo
-} fat12_fs;
+} fat_fs;
 
 static void seek_img(uint32_t pos) {
-    lseek(fat12_fs.img_fd, pos, SEEK_SET);
+    lseek(fat_fs.img_fd, pos, SEEK_SET);
 }
 
 static void read_img_exact(int n_bytes, uint8_t* buf) {
     while(n_bytes > 0) {
-        int n_bytes_read_last = read(fat12_fs.img_fd, buf, n_bytes);
+        int n_bytes_read_last = read(fat_fs.img_fd, buf, n_bytes);
         if(n_bytes_read_last < 1) {
             printf("Unexpected EOF %d\r\n", errno);
             abort();
@@ -63,9 +63,9 @@ static void read_header() {
 static uint16_t read_fat_entry(uint16_t offset) {
     uint32_t first_byte_offset = (offset * 3) / 2;
     if(offset % 2) {
-        return ((fat12_fs.file_allocation_table[first_byte_offset] & 0xF0) >> 4) | (fat12_fs.file_allocation_table[first_byte_offset + 1] << 4);
+        return ((fat_fs.file_allocation_table[first_byte_offset] & 0xF0) >> 4) | (fat_fs.file_allocation_table[first_byte_offset + 1] << 4);
     } else {
-        return fat12_fs.file_allocation_table[first_byte_offset] | ((fat12_fs.file_allocation_table[first_byte_offset + 1] & 0x0F) << 8);
+        return fat_fs.file_allocation_table[first_byte_offset] | ((fat_fs.file_allocation_table[first_byte_offset + 1] & 0x0F) << 8);
     }
 }
 
@@ -76,8 +76,8 @@ static bool parse_dir_entry(uint8_t* entry_bytes, struct stat *stbuf, char* file
 
 static void *fat_init(struct fuse_conn_info *conn, struct fuse_config *cfg) {
     printf("fat_init\r\n");
-    fat12_fs.img_fd = open(IMAGE_FILE, O_RDONLY);
-    if(fat12_fs.img_fd < 0) {
+    fat_fs.img_fd = open(IMAGE_FILE, O_RDONLY);
+    if(fat_fs.img_fd < 0) {
         printf("Could not open file %d\r\n", errno);
         abort();
     }
@@ -89,7 +89,7 @@ static void *fat_init(struct fuse_conn_info *conn, struct fuse_config *cfg) {
 
 static void fat_destroy(void* private_data) {
     printf("fat_destroy\r\n");
-    close(fat12_fs.img_fd);
+    close(fat_fs.img_fd);
 }
 
 static int fat_getattr(const char *path, struct stat *stbuf, struct fuse_file_info *fi) {

@@ -3,6 +3,8 @@ threads_sync
 noutofm_solution
 noutofm
 counter_solution
+counter_solution_atomics
+counter_solution_mutex
 counter
 parallel_stats_solution
 parallel_stats
