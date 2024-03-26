@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "atomic": "c"
+        "atomic": "c",
+        "errno.h": "c"
     }
 }

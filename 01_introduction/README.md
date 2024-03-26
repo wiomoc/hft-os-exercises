@@ -26,17 +26,29 @@ Also take a look at the output of `lspci`
 ## Application - Operating System Interaction
 Compile the two programs `adder` and `www` using `make`.
 The program `adder` accepts two integer arguments which are then added together. e.g. `./adder 2 3`.
-The program `web` retrieves the first website in the world and displays it together with the http header on the terminal
+The program `web` retrieves a website and displays the raw response in the terminal.
+We now going to explore which methods of the Linux Kernel (so-called Syscalls) are invoked by the program during execution. The programm `strace` is 
 
-Start `adder` and `www` using `strace`. 
-* What do you see?
+Start `adder` using `strace`.
 * What happens during the program start?
+* How is the standard library (libc) loaded? 
+Note: The concept of virtual memory is explained later in the lecture. You could assume for now the Syscall `mmap` is used for loading a file to a specific point in memory and setting sufficent permissions for access.
+* How is the result writen to terminal?
+Now start `www` using `strace` e.g. `strace ./adder 42 99`
+* How is the DNS lookup performed?
 * How is a network connection established and data exchanged?
 
 
-# Compilerexplorer
-How does the cpu processes the example
-https://godbolt.org/z/3E68K5aTh
+## Compiler Explorer
+Try to figure out how an ARM cpu processes the `adder` example by looking at the [compiled assembly code](https://godbolt.org/z/oaq5zee6n).
+
+How are is the function `add` called, how are a arguments passed and how does the function return?
+
+What are the operations [`cmp`](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/cmp-and-cmn), [`mov`](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/mov), [`b[le]`](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/b), `ldr`, [`bl`](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/bl) for?
+
+What is the purpose of the `push` and `pop` operation?
+
+Informations on the register used can be found [here](https://courses.washington.edu/cp105/02_Exceptions/Calling%20Standard.html).
 
 
 ## Latencies
