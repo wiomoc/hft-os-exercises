@@ -1,2 +1,3 @@
 #!/bin/bash
-apt install libfuse3-dev
+apt update
+apt install -y libfuse3-dev pkg-config

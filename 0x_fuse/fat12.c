@@ -16,6 +16,7 @@
 
 struct {
     int img_fd;
+    uint8_t* file_allocation_table;
     // todo
 } fat12_fs;
 
