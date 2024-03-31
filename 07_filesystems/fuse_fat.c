@@ -56,10 +56,6 @@ static void read_time(uint8_t* buf, struct tm* time) {
     time->tm_hour = (buf[1] & 0xF8) >> 3;
 }
 
-static void read_header() {
-    // todo
-}
-
 static uint16_t read_fat_entry(uint16_t offset) {
     uint32_t first_byte_offset = (offset * 3) / 2;
     if(offset % 2) {
@@ -141,12 +137,20 @@ static int fat_read(const char *path, char *buf, size_t size, off_t offset,
 }
 
 static const struct fuse_operations fat_ops = {
+        /* called when the application startes and fs should be mounted. */
         .init           = fat_init,
+        /* called when the fs should be unmounted */
         .destroy        = fat_destroy,
+        /* called when the kernel or a application wants to get the metadata 
+           of a file / a directory. e.g. type, permissions, creation date, etc. */
         .getattr        = fat_getattr,
+        /* called when a application wants to list the files or directory contained in a given directory  */
         .readdir        = fat_readdir,
+        /* called when a application wants to open a file (for reading) */
         .open           = fat_open,
+        /* called when a application is finished with reading a file so the file handle could be freed */
         .release        = fat_release,
+        /* called when a application wants to read from a file */
         .read           = fat_read,
 };
 
