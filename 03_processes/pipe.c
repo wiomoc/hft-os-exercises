@@ -7,16 +7,17 @@
 
 int main(int argc, char** argv) {
     if(argc < 4) {
-        printf("invalid arguments expected: %s cmd1 [arg1*] | cmd2 [arg2*]\r\n", argv[0]);
+        printf("invalid arguments. Expected: %s cmd1 [arg1*] | cmd2 [arg2*]\r\n", argv[0]);
         return 1;
     }
 
     int pipe_loc;
     for (pipe_loc = 1; pipe_loc < argc; pipe_loc++) 
-        if(!strcmp(argv[pipe_loc], "|"))
+        if(strcmp(argv[pipe_loc], "|") == 0)
             break;
     if (pipe_loc > argc - 1) {
-        printf("invalid arguments expected: %s cmd1 [arg1*] | cmd2 [arg2*]\r\n", argv[0]);
+        printf("invalid arguments, | missing. Expected: %s cmd1 [arg1*] | cmd2 [arg2*]\r\n", argv[0]);
+        return 1;
     }
 
     char* first_pgm = argv[1];

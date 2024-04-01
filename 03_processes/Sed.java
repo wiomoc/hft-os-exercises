@@ -1,19 +1,14 @@
 import java.lang.ProcessBuilder;
 import java.io.PrintStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 
 public class Sed {
     public static void main(String[] args) throws IOException {
-        Process process = new ProcessBuilder("sed", "s/B/2/g")
-                .start();
-        BufferedReader inStream = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        PrintStream outStream = new PrintStream(process.getOutputStream());
+        System.out.println(sed("s/[^ _-]*/\\u&/g", "operating systems hft stuttgart"));
+    }
 
-        outStream.println("ABC");
-        outStream.flush();
-        outStream.close();
-        System.out.println(inStream.readLine());
+    public static String sed(String pattern, String input) throws IOException {
+        return "";
     }
 }

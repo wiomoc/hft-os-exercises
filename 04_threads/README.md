@@ -1,4 +1,4 @@
-# Excersise 02: Threads
+# Exercise 04: Threads
 The code of all following exercises can be build with `make` 
 
 ## Parallel Statistics

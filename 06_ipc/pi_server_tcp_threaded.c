@@ -20,10 +20,12 @@ void *client_handler(void *args)
             continue;
         int requested_digit_int = requested_digit - '0';
 
-        char response[3];
+        char response[5];
         response[0] = requested_digit;
         response[1] = ':';
         response[2] = PI_DECIMALS[requested_digit_int];
+        response[3] = '\r';
+        response[4] = '\n';
         send(cfd, response, sizeof(response), 0);
     }
 }
