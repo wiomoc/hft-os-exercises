@@ -7,24 +7,24 @@
 #include<unistd.h>
 
 void* thread_main(void* arg) {
-    int n = (int)((uintptr_t)arg);
+    int m = (int)((uintptr_t)arg);
     int seconds_to_sleep = (rand() % 10) + 1;
-    printf("Thread %d is going to sleep for %d s\r\n", n, seconds_to_sleep);
+    printf("Thread %d is going to sleep for %d s\r\n", m, seconds_to_sleep);
     sleep(seconds_to_sleep);
-    printf("Thread %d finished sleeping\r\n", n);
+    printf("Thread %d finished sleeping\r\n", m);
     return NULL;
 }
 
-#define N 10
-#define M 5
+#define M 10
+#define N 5
 int main(int argc, char** argv) {
-    pthread_t threads[N];
-    for(int n = 0; n < N; n++) {
-        pthread_create(&threads[n], NULL, thread_main, (void*)((uintptr_t)n));
+    pthread_t threads[M];
+    for(int m = 0; m < M; m++) {
+        pthread_create(&threads[m], NULL, thread_main, (void*)((uintptr_t)m));
     }
 
-    for(int n = 0; n < N; n++){
-        pthread_join(threads[n], NULL);
+    for(int m = 0; m < M; m++){
+        pthread_join(threads[m], NULL);
     }
 
 }

@@ -8,3 +8,4 @@ counter_solution_mutex
 counter
 parallel_stats_solution
 parallel_stats
+*.class

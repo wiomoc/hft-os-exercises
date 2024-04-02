@@ -16,4 +16,9 @@ b. Correct the program using mutexes so that actual == expected. You will requir
 c. Correct the program using atomics so that actual == expected. You will require the method [atomic_fetch_add](https://en.cppreference.com/w/c/atomic/atomic_fetch_add).
 
 ## N-out-of-M
-Inspect the file `noutofm.c`. We 
+Inspect the file `noutofm.c`. We starting `M` thread, each thread sleep for an indiviual time between 1-10 seconds and after every thread finished that we terminate.
+Now change the program in the way, that the program terminates after only `N` threads are finished with their sleep. Use [condition variables](https://stackoverflow.com/a/20772586/5048815) in the implementation.
+
+Methods required: `pthread_create`, `pthread_mutex_init`, `pthread_cond_init`, `pthread_mutex_init`, `pthread_mutex_lock`, `pthread_mutex_unlock`, `pthread_cond_signal`, `pthread_cond_wait`.
+
+## N-out-of-M in Java
