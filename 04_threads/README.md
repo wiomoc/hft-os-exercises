@@ -22,3 +22,4 @@ Now change the program in the way, that the program terminates after only `N` th
 Methods required: `pthread_create`, `pthread_mutex_init`, `pthread_cond_init`, `pthread_mutex_init`, `pthread_mutex_lock`, `pthread_mutex_unlock`, `pthread_cond_signal`, `pthread_cond_wait`.
 
 ## N-out-of-M in Java
+Implement the same functionality in the Java, use `NOutOfM.java` as foundation. You will need to use [synchronized methods](https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html) as well as [`wait` and `notify`](https://www.baeldung.com/java-wait-notify). Don't use a `CountDownLatch` for now.

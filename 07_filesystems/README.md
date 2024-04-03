@@ -1,5 +1,13 @@
-# Excersise 0x
-## Working with Filesystems
+# Exercise 07: Filesystem
+
+## Creating a Filesystem in a Imagefile
+* Use `dd` to create a 25 MB file
+* Use `mkfs.vfat -F 16` to create a FAT file system in the created file
+* Switch to a root shell via `sudo su` as you need elevated permissions for the nexts step.
+* Mount the file under `/mnt/myfs` with the command `mount`. Create the directory `/mnt/myfs` if it doesn't yet exist via `mkdir /mnt/myfs`.
+* Create a file in the new file system, e.g. `echo "Hello world" > /mnt/myfs/test.txt`.
+* Unmount the file system with `umount`.
+* View the created file with `hexdump -C`.  Can you find your file (content and name) again?
 
 ## Writing our own FAT12 FS Driver with FUSE
 The following will be the biggest tasks in all exercises of this lecture.

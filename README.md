@@ -24,4 +24,3 @@ However if you using ubuntu you probably need the following additional packages:
 * `gcc`
 * `pkg-config`
 * `libfuse3-dev`
-* `fdisk`
