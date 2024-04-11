@@ -8,18 +8,20 @@
 #include <cgif.h>
 #include <math.h>
 
-#define FRAMES 20
 #define HEIGHT 1000
 #define WIDTH 1000
-#define MAX_ITER 1000
+#define MAX_ITER 512
 #define PALLETE_SIZE 256
 #define COMPONENTS_PER_COLOR 3
+#define N_FRAMES 60
+#define BASE_X (-0.77568377)
+#define BASE_Y (0.136467)
 
-#define SCALE(x, old_min, old_max, new_min, new_max) (x - old_min) * ((new_max - new_min) / (old_max - old_min)) + new_min
+#define SCALE(x, old_min, old_max, new_min, new_max) ((x) - (old_min)) * (((new_max) - (new_min)) / ((old_max) - (old_min))) + (new_min)
 
-uint8_t mandelbrot_pixel(int x, int y) {
-    double x_scaled =  SCALE(x, 0.0, WIDTH - 1, -1.5, 1.5); 
-    double y_scaled =  SCALE(y, 0.0, HEIGHT - 1, -1.5, 1.5);
+uint8_t mandelbrot_pixel(int x, int y, float zoom) {
+    double x_scaled =  SCALE(x, 0.0, WIDTH - 1, (-1.0 / zoom) + BASE_X, (1.0 / zoom) + BASE_X); 
+    double y_scaled =  SCALE(y, 0.0, HEIGHT - 1, (-1.0 / zoom) + BASE_Y, (1.0 / zoom) + BASE_Y);
 
     double u = 0; 
     double v = 0;
@@ -34,6 +36,7 @@ uint8_t mandelbrot_pixel(int x, int y) {
 }
 
 void hsv2rgb(float H, float S, float V, uint8_t* out) {
+
 	float r, g, b;
 	
 	float h = H / 360;
@@ -80,18 +83,21 @@ int main(int argc, char**  argv) {
 
     CGIF* gif = cgif_newgif(&gif_config);
 
-    uint8_t* frame_pixels = malloc(WIDTH * HEIGHT * sizeof(uint8_t));
 
-    for (int x = 0; x < WIDTH; x++) {
-        for (int y = 0; y < HEIGHT; y++) {
-            frame_pixels[x * HEIGHT + y] = mandelbrot_pixel(x, y);
+    for(int frame_number = 0; frame_number < N_FRAMES; frame_number++) {
+        uint8_t* frame_pixels = malloc(WIDTH * HEIGHT * sizeof(uint8_t));
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                frame_pixels[x * HEIGHT + y] = mandelbrot_pixel(x, y, pow(1.12, (frame_number * 3)));
+            }
         }
-    }
 
-    CGIF_FrameConfig gif_frame_config;
-    memset(&gif_frame_config, 0, sizeof(CGIF_FrameConfig));
-    gif_frame_config.pImageData = frame_pixels;
-    cgif_addframe(gif, &gif_frame_config);
+        CGIF_FrameConfig gif_frame_config;
+        memset(&gif_frame_config, 0, sizeof(CGIF_FrameConfig));
+        gif_frame_config.delay = 30;
+        gif_frame_config.pImageData = frame_pixels;
+        cgif_addframe(gif, &gif_frame_config);
+    }
 
     cgif_close(gif);
 }

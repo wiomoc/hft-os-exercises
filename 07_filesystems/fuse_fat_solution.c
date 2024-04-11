@@ -181,6 +181,7 @@ static void *fat_init(struct fuse_conn_info *conn, struct fuse_config *cfg) {
 
 static void fat_destroy(void* private_data) {
     printf("fat_destroy\r\n");
+    free(fat_fs.file_allocation_table);
     close(fat_fs.img_fd);
 }
 

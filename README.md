@@ -1,6 +1,8 @@
 # HFT SS24 - Operating Systems - Exercises
 This repository contains the exercises for the operating systems part of the lecture Networks and Operating Systems of the summer semester 2024.
 
+Credits: Some tasks are taken of the exercises from [Prof. Sebastian Speiser](https://www.hft-stuttgart.de/p/sebastian-speiser).
+
 The tasks of the exercises can be roughly divided into three categories:
 1. tasks with the shell / console - these explain how to use Linux and discover details of operating systems
 2. programming tasks in C - here we look at programming concepts that are close to the operating system, such as threads and the development of a file system driver
